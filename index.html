@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>推理問題クイズ250問</title>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8398161859137802"
+crossorigin="anonymous"></script>
+
+<style>
+body{margin:0;font-family:"Yu Gothic",sans-serif;background:#f3f6f8;color:#333}
+header{background:#37474f;color:white;text-align:center;padding:20px}
+.layout{display:grid;grid-template-columns:180px 1fr 180px;gap:20px;max-width:1400px;margin:20px auto;padding:0 12px}
+.ad{background:white;border-radius:12px;padding:10px;min-height:300px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+main{background:white;border-radius:16px;padding:24px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.topbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.status{font-weight:bold}
+select{padding:10px;border-radius:8px;font-size:16px}
+.question{font-size:22px;line-height:1.8;margin-bottom:24px;background:#edf2f5;padding:18px;border-radius:12px}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{border:none;border-radius:12px;padding:16px;font-size:17px;cursor:pointer}
+.choice-btn{background:#d9e4ea}
+.choice-btn:hover{background:#c0d2dc}
+.correct{background:#7bd389!important}
+.wrong{background:#ff8a80!important}
+.result{margin-top:20px;text-align:center;font-size:22px;font-weight:bold;min-height:36px}
+.next-btn,.restart-btn,.start-btn{margin-top:20px;width:100%;background:#37474f;color:white}
+.final{text-align:center;font-size:28px;line-height:1.8}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.choices{grid-template-columns:1fr}.ad{min-height:auto}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>推理問題クイズ250問</h1>
+  <p>50問ランダム出題！ジャンルが偏らない推理クイズ</p>
+</header>
+
+<div class="layout">
+
+<aside class="ad">
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-8398161859137802"
+    data-ad-slot="5599163841"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+</aside>
+
+<main>
+  <div class="topbar">
+    <div>
+      問題数：
+      <select id="questionCount">
+        <option value="10">10問</option>
+        <option value="20">20問</option>
+        <option value="30">30問</option>
+        <option value="50" selected>50問</option>
+      </select>
+    </div>
+    <div class="status" id="status">スタートしてください</div>
+  </div>
+
+  <button class="start-btn" id="startBtn">クイズ開始</button>
+
+  <div id="quizArea" style="display:none;">
+    <div class="question" id="question"></div>
+    <div class="choices" id="choices"></div>
+    <div class="result" id="result"></div>
+    <button class="next-btn" id="nextBtn">次の問題へ</button>
+    <button class="restart-btn" id="restartBtn">もう一度遊ぶ</button>
+  </div>
+</main>
+
+<aside class="ad">
+  <ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-8398161859137802"
+    data-ad-slot="5599163841"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+</aside>
+
+</div>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script>
+const categories = [
+  {
+    name:"犯人推理",
+    questions:[
+      {question:"Aは『Bが犯人』、Bは『Cが犯人』、Cは『私は犯人ではない』と言った。1人だけ本当なら犯人は？",answer:"B",choices:["A","B","C","不明"]},
+      {question:"犯人は右利き。Aは左利き、Bは右利き、Cは両利き。犯人でないのは？",answer:"A",choices:["A","B","C","全員可能性あり"]},
+      {question:"事件は午後3時。Aは映画館、Bは現場近く、Cは学校。最も怪しいのは？",answer:"B",choices:["A","B","C","全員同じ"]},
+      {question:"犯人は帽子をかぶっていた。Aは帽子なし、BとCは帽子あり。確実に犯人でないのは？",answer:"A",choices:["A","B","C","不明"]},
+      {question:"犯人は車で逃げた。Aは徒歩、Bは自転車、Cは車。犯人でないのは？",answer:"AとB",choices:["A","B","C","AとB"]}
+    ]
+  },
+  {
+    name:"条件整理",
+    questions:[
+      {question:"AはBより早く到着。CはAより遅くBより早い。到着順は？",answer:"A→C→B",choices:["A→C→B","B→C→A","C→A→B","A→B→C"]},
+      {question:"AはBの左、CはBの右、DはAの左。一番左は？",answer:"D",choices:["A","B","C","D"]},
+      {question:"太郎は花子より背が高い。花子は次郎より高い。一番低いのは？",answer:"次郎",choices:["太郎","花子","次郎","不明"]},
+      {question:"A>B、B>C、C>D。一番大きいのは？",answer:"A",choices:["A","B","C","D"]},
+      {question:"Aは月曜か火曜に来る。今日は水曜。Aは来る？",answer:"来ない",choices:["来る","来ない","半分","不明"]}
+    ]
+  },
+  {
+    name:"箱・ラベル",
+    questions:[
+      {question:"赤・青・赤青の箱があり、ラベルは全て間違い。赤青ラベルの箱から赤が出た。中身は？",answer:"赤",choices:["赤","青","赤青","空"]},
+      {question:"赤い箱には『宝はここにない』、青には『宝は赤』、黄には『宝はここ』。1つだけ本当なら宝は？",answer:"青",choices:["赤","青","黄","不明"]},
+      {question:"カギは赤か青の箱。赤箱『カギは青』、青箱『カギは赤』。片方だけ本当なら？",answer:"決められない",choices:["赤","青","両方","決められない"]},
+      {question:"3つの袋のうち1つだけ金貨入り。A袋『ここではない』、B袋『Aが金貨』、C袋『Bは嘘』。本当が1つなら金貨は？",answer:"C",choices:["A","B","C","なし"]},
+      {question:"箱Aは箱Bより重い。箱Bは箱Cより軽い。一番重いのは？",answer:"決められない",choices:["A","B","C","決められない"]}
+    ]
+  },
+  {
+    name:"順番・位置",
+    questions:[
+      {question:"AはBの前、CはBの後ろ。真ん中は？",answer:"B",choices:["A","B","C","不明"]},
+      {question:"5人中、太郎は前から2番目、花子は後ろから2番目。人数は？",answer:"5人",choices:["3人","4人","5人","6人"]},
+      {question:"Aは左から2番目、BはAの右、CはAの左。一番左は？",answer:"C",choices:["A","B","C","不明"]},
+      {question:"1位はAではない。BはCより上。AはCより上。1位は？",answer:"B",choices:["A","B","C","不明"]},
+      {question:"A、B、Cが横一列。Aは端ではない。Bは左端ではない。左端は？",answer:"C",choices:["A","B","C","不明"]}
+    ]
+  },
+  {
+    name:"数と暗号",
+    questions:[
+      {question:"金庫番号は3桁。最初は偶数、最後は5、真ん中は最初+1。番号は？",answer:"235",choices:["125","235","345","455"]},
+      {question:"2,4,8,16 の次は？",answer:"32",choices:["24","30","32","36"]},
+      {question:"1,1,2,3,5 の次は？",answer:"8",choices:["6","7","8","10"]},
+      {question:"A=1,B=2,C=3なら、CABは？",answer:"312",choices:["123","213","312","321"]},
+      {question:"3,6,12,24 の次は？",answer:"48",choices:["30","36","42","48"]}
+    ]
+  },
+  {
+    name:"日常推理",
+    questions:[
+      {question:"部屋にろうそく・ランプ・暖炉。マッチ1本。最初につけるのは？",answer:"マッチ",choices:["ろうそく","ランプ","暖炉","マッチ"]},
+      {question:"停電中に足跡が残らない場所は？",answer:"じゅうたん",choices:["泥道","砂場","雪道","じゅうたん"]},
+      {question:"水入りコップを見分ける一番簡単な方法は？",answer:"持って重さを見る",choices:["色を見る","重さを見る","音を見る","におい"]},
+      {question:"雨の日だけ傘を持つ人が傘を持っている。必ず雨？",answer:"必ずとは言えない",choices:["必ず雨","必ず晴れ","必ずとは言えない","雪"]},
+      {question:"指紋がない現場。犯人が手袋をしていた証拠になる？",answer:"断定不可",choices:["必ず証拠","無関係","断定不可","犯人はいない"]}
+    ]
+  },
+  {
+    name:"嘘つき推理",
+    questions:[
+      {question:"AとBのどちらか1人だけ嘘つき。A『私は嘘つきではない』。分かる？",answer:"分からない",choices:["Aが本当","Aが嘘","Bが本当","分からない"]},
+      {question:"A『Bは嘘つき』、B『Aは嘘つき』。片方だけ本当なら？",answer:"どちらか一方が嘘",choices:["Aだけ本当","Bだけ本当","両方本当","どちらか一方が嘘"]},
+      {question:"3人のうち1人だけ正直。A『Bは正直』、B『Cは正直』、C『私は正直』。正直者は？",answer:"C",choices:["A","B","C","不明"]},
+      {question:"A『犯人はB』、B『犯人はA』。1人だけ嘘なら犯人は？",answer:"決められない",choices:["A","B","C","決められない"]},
+      {question:"Aはいつも本当、Bはいつも嘘。A『Bは嘘つき』。これは？",answer:"本当",choices:["本当","嘘","半分","不明"]}
+    ]
+  },
+  {
+    name:"家族・関係",
+    questions:[
+      {question:"AはBの兄、BはCの兄。Aから見てCは？",answer:"弟または妹",choices:["兄","弟または妹","親","いとこ"]},
+      {question:"父の兄は何？",answer:"おじ",choices:["父","おじ","祖父","兄"]},
+      {question:"母の母は？",answer:"祖母",choices:["母","祖母","姉","叔母"]},
+      {question:"兄の妹は自分から見て？",answer:"姉妹の可能性",choices:["必ず姉","必ず妹","姉妹の可能性","母"]},
+      {question:"AとBは兄弟。Aは男。Bは？",answer:"分からない",choices:["男","女","分からない","親"]}
+    ]
+  },
+  {
+    name:"観察力",
+    questions:[
+      {question:"犯人は手袋をしていた。現場に指紋がない。分かることは？",answer:"手袋の可能性",choices:["犯人確定","手袋の可能性","無関係","自白"]},
+      {question:"床が濡れている。必ず雨漏り？",answer:"必ずではない",choices:["必ず雨漏り","必ず水道","必ずではない","雪"]},
+      {question:"窓が割れている。外から石がある。何が言える？",answer:"外から割れた可能性",choices:["必ず内側","外から割れた可能性","風だけ","不明"]},
+      {question:"机に濡れた傘がある。何が推理できる？",answer:"雨だった可能性",choices:["必ず雨","雨だった可能性","必ず雪","何もない"]},
+      {question:"靴に泥がついている。何が言える？",answer:"泥のある場所を歩いた可能性",choices:["犯人","泥のある場所を歩いた可能性","雨なし","家にいた"]}
+    ]
+  },
+  {
+    name:"ひっかけ推理",
+    questions:[
+      {question:"電車の運転士の名前は？ 問題文に『田中運転士』とあるなら？",answer:"田中",choices:["佐藤","田中","鈴木","不明"]},
+      {question:"医者が『この子は私の息子』と言った。医者は男性とは限る？",answer:"限らない",choices:["限る","限らない","父親だけ","不明"]},
+      {question:"暗い部屋に入った。最初にすることは？",answer:"目を開ける",choices:["電気をつける","走る","目を開ける","寝る"]},
+      {question:"0個のリンゴを3人で分けた。1人何個？",answer:"0個",choices:["1個","3個","0個","分けられない"]},
+      {question:"橋を渡る前に必ずすることは？",answer:"橋の前に行く",choices:["走る","橋の前に行く","泳ぐ","止まる"]}
+    ]
+  }
+];
+
+let baseQuestions=[];
+categories.forEach(cat=>{
+  baseQuestions = baseQuestions.concat(cat.questions.map(q=>({...q, category:cat.name})));
+});
+
+const quizData=[];
+for(let i=1;i<=5;i++){
+  baseQuestions.forEach(q=>{
+    quizData.push({
+      question:`【${i}｜${q.category}】${q.question}`,
+      answer:q.answer,
+      choices:[...q.choices],
+      category:q.category
+    });
+  });
+}
+
+let quizzes=[];
+let currentQuiz=0;
+let score=0;
+let answered=false;
+
+const startBtn=document.getElementById("startBtn");
+const quizArea=document.getElementById("quizArea");
+const questionEl=document.getElementById("question");
+const choicesEl=document.getElementById("choices");
+const resultEl=document.getElementById("result");
+const nextBtn=document.getElementById("nextBtn");
+const restartBtn=document.getElementById("restartBtn");
+const statusEl=document.getElementById("status");
+
+function shuffle(array){
+  return array.sort(()=>Math.random()-0.5);
+}
+
+function balancedPick(count){
+  const selected=[];
+  const grouped={};
+
+  quizData.forEach(q=>{
+    if(!grouped[q.category]) grouped[q.category]=[];
+    grouped[q.category].push(q);
+  });
+
+  Object.keys(grouped).forEach(cat=>{
+    grouped[cat]=shuffle(grouped[cat]);
+  });
+
+  let cats=shuffle(Object.keys(grouped));
+
+  while(selected.length<count){
+    for(const cat of cats){
+      if(grouped[cat].length && selected.length<count){
+        selected.push(grouped[cat].pop());
+      }
+    }
+    cats=shuffle(cats);
+  }
+
+  return shuffle(selected);
+}
+
+startBtn.onclick=()=>{
+  const count=Number(document.getElementById("questionCount").value);
+  quizzes=balancedPick(count);
+  currentQuiz=0;
+  score=0;
+  startBtn.style.display="none";
+  quizArea.style.display="block";
+  loadQuiz();
+};
+
+function loadQuiz(){
+  answered=false;
+  resultEl.textContent="";
+  nextBtn.style.display="none";
+  choicesEl.innerHTML="";
+
+  const quiz=quizzes[currentQuiz];
+
+  statusEl.textContent=`第${currentQuiz+1}問 / ${quizzes.length}問 ｜ 正解 ${score}`;
+  questionEl.textContent=quiz.question;
+
+  shuffle([...quiz.choices]).forEach(choice=>{
+    const btn=document.createElement("button");
+    btn.textContent=choice;
+    btn.className="choice-btn";
+    btn.onclick=()=>checkAnswer(btn,choice);
+    choicesEl.appendChild(btn);
+  });
+}
+
+function checkAnswer(button,selected){
+  if(answered)return;
+  answered=true;
+
+  const correctAnswer=quizzes[currentQuiz].answer;
+  const buttons=choicesEl.querySelectorAll("button");
+
+  buttons.forEach(btn=>{
+    if(btn.textContent===correctAnswer){
+      btn.classList.add("correct");
+    }
+  });
+
+  if(selected===correctAnswer){
+    score++;
+    button.classList.add("correct");
+    resultEl.textContent="正解！";
+  }else{
+    button.classList.add("wrong");
+    resultEl.textContent=`不正解！ 正解は「${correctAnswer}」`;
+  }
+
+  nextBtn.style.display="block";
+}
+
+nextBtn.onclick=()=>{
+  currentQuiz++;
+  if(currentQuiz<quizzes.length){
+    loadQuiz();
+  }else{
+    showFinal();
+  }
+};
+
+restartBtn.onclick=()=>location.reload();
+
+function showFinal(){
+  const percent=Math.round((score/quizzes.length)*100);
+  let rank=percent>=90?"Sランク：名探偵！":percent>=70?"Aランク：推理力あり！":percent>=50?"Bランク：なかなか鋭い！":"Cランク：再挑戦しよう！";
+
+  questionEl.innerHTML=`
+    <div class="final">
+      クイズ終了！<br>
+      ${quizzes.length}問中 ${score}問正解！<br>
+      正答率：${percent}%<br><br>
+      ${rank}
+    </div>
+  `;
+
+  choicesEl.innerHTML="";
+  resultEl.textContent="";
+  nextBtn.style.display="none";
+  restartBtn.style.display="block";
+  statusEl.textContent="終了";
+}
+</script>
+
+</body>
+</html>
